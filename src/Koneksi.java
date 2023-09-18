@@ -3,9 +3,9 @@ import java.sql.*;
 
 public class Koneksi extends DatabaseManager{
 //    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/java_perpustakaan";
-    static final String USER = "root";
-    static final String PASS = "";
+    private static final String DB_URL = "jdbc:mysql://localhost/java_perpustakaan";
+    private static final String USER = "root";
+    private static final String PASS = "";
 
     @Override
     public void connect() {
