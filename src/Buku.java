@@ -11,10 +11,12 @@ public class Buku {
     private String judul_buku;
     private String pengarang_buku;
 
+    private DatabaseManager dbManager = new Koneksi();
     public void getAllBuku() {
         String sql = "SELECT * FROM tb_buku";
         try {
-            Connection conn = Koneksi.getConnection();
+            dbManager.connect();
+            Connection conn = dbManager.connection;
             Statement stmt = conn.createStatement();
             ResultSet resultSet = stmt.executeQuery(sql);
 
@@ -28,7 +30,7 @@ public class Buku {
                 System.out.println("Pengarang Buku: " + pengarang_buku);
                 System.out.println("====================================");
             }
-            Koneksi.closeConnection();
+            dbManager.disconnect();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -38,7 +40,8 @@ public class Buku {
         String sql = "SELECT * FROM tb_buku WHERE id_buku = '%d'";
         sql = String.format(sql, id);
         try {
-            Connection conn = Koneksi.getConnection();
+            dbManager.connect();
+            Connection conn = dbManager.connection;
             Statement stmt = conn.createStatement();
             ResultSet resultSet = stmt.executeQuery(sql);
 
@@ -51,7 +54,7 @@ public class Buku {
                 System.out.println("Judul Buku: " + judul_buku);
                 System.out.println("Pengarang Buku: " + pengarang_buku);
             }
-            Koneksi.closeConnection();
+            dbManager.disconnect();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -62,10 +65,12 @@ public class Buku {
         sql = String.format(sql, judul_buku, pengarang_buku);
 
         try {
-            Connection conn = Koneksi.getConnection();
+            dbManager.connect();
+            Connection conn = dbManager.connection;
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(sql);
-            Koneksi.closeConnection();
+            dbManager.disconnect();
+            System.out.println("Buku berhasil ditambahkan!");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -75,10 +80,12 @@ public class Buku {
         String sql = "UPDATE tb_buku SET judul = '%s', pengarang = '%s' WHERE id_buku = %d";
         sql = String.format(sql, judul_buku, pengarang_buku, id);
         try {
-            Connection conn = Koneksi.getConnection();
+            dbManager.connect();
+            Connection conn = dbManager.connection;
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(sql);
-            Koneksi.closeConnection();
+            dbManager.disconnect();
+            System.out.println("Buku berhasil diubah!");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -88,10 +95,12 @@ public class Buku {
         String sql = "DELETE FROM tb_buku WHERE id_buku = '%d'";
         sql = String.format(sql, id);
         try{
-            Connection conn = Koneksi.getConnection();
+            dbManager.connect();
+            Connection conn = dbManager.connection;
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(sql);
-            Koneksi.closeConnection();
+            dbManager.disconnect();
+            System.out.println("Buku berhasil dihapus!");
         } catch(SQLException e){
             e.printStackTrace();
         }

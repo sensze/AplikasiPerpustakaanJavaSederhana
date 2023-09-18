@@ -12,26 +12,30 @@ public class Menu {
     private int idAnggota;
     private String namaAnggota;
     private String noAnggota;
+    private int idPeminjaman;
     Buku buku = new Buku();
     Anggota anggota = new Anggota();
+    Peminjaman peminjaman = new Peminjaman();
 
     public void showMenu() throws IOException {
-        System.out.println("Manajemen Buku");
+        System.out.println("Manajemen Buku: ");
         System.out.println("[1] Show all buku");
         System.out.println("[2] Show buku by id");
         System.out.println("[3] Insert buku");
         System.out.println("[4] Edit buku");
         System.out.println("[5] Delete buku");
-        System.out.println("Manajemen Anggota");
+        System.out.println("Manajemen Anggota: ");
         System.out.println("[6] Show all anggota");
         System.out.println("[7] Show anggota by id");
         System.out.println("[8] Insert anggota");
         System.out.println("[9] Edit anggota");
         System.out.println("[10] Delete anggota");
-        System.out.println("Manajemen Peminjaman");
+        System.out.println("Manajemen Peminjaman: ");
         System.out.println("[11] Peminjaman buku");
         System.out.println("[12] Get all peminjaman buku");
         System.out.println("[13] Pengembalian buku");
+        System.out.println("[14] Get all Pengembalian buku");
+        System.out.println("[15] keluar");
 
         System.out.println("Silahkan masukkan menu: ");
         int selectedMenu = Integer.parseInt(input.readLine().trim());
@@ -94,6 +98,25 @@ public class Menu {
                 System.out.println("Masukkan id anggota yang ingin di hapus: ");
                 idAnggota = Integer.parseInt(input.readLine().trim());
                 anggota.deleteAnggota(idAnggota);
+                break;
+            case 11:
+                System.out.println("Masukkan id buku: ");
+                idBuku = Integer.parseInt(input.readLine().trim());
+                System.out.println("Masukkan id anggota: ");
+                idAnggota = Integer.parseInt(input.readLine().trim());
+                peminjaman.createPeminjaman(idBuku, idAnggota);
+                break;
+            case 12:
+                peminjaman.getAllPeminjaman();
+                break;
+            case 13:
+                System.out.println("Masukkan id peminjaman anda: ");
+                idPeminjaman = Integer.parseInt(input.readLine());
+                peminjaman.createPengembalian(idPeminjaman);
+                break;
+            case 14:
+                peminjaman.getAllPengembalian();
+            case 15:
                 break;
             default:
                 System.out.println("Menu tidak tersedia!");
